@@ -1,3 +1,4 @@
-.npm
+node_modules
+dist
 coverage
-coverage.lcov
+lcov.info
