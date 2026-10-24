@@ -1,4 +1,4 @@
-// deno-lint-ignore-file no-explicit-any
+// biome-ignore-all lint/suspicious/noExplicitAny: callbacks accept any arguments, like setTimeout
 
 const MAX_DELAY = 2147483647; // 2 ** 31 - 1
 const ACCURACY = 250;
@@ -13,10 +13,7 @@ export interface Timer {
 export function createTimeout(cb: (...args: any[]) => void): Timer;
 export function createTimeout(cb: (...args: any[]) => void, ms: number): Timer;
 export function createTimeout(cb: (...args: any[]) => void, date: Date): Timer;
-export function createTimeout(
-  cb: (...args: any[]) => void,
-  delay?: number | Date,
-): Timer {
+export function createTimeout(cb: (...args: any[]) => void, delay?: number | Date): Timer {
   let waitUntil = parseDelay(delay ?? 0);
   let timer: ReturnType<typeof setTimeout> | null = null;
   let pauseRemains: number | null = null;
@@ -70,11 +67,7 @@ export function createInterval(cb: (...args: any[]) => void): Timer;
 export function createInterval(cb: (...args: any[]) => void, interval: number): Timer;
 export function createInterval(cb: (...args: any[]) => void, interval: number, delayMs: number): Timer;
 export function createInterval(cb: (...args: any[]) => void, interval: number, delayDate: Date): Timer;
-export function createInterval(
-  cb: (...args: any[]) => void,
-  interval?: number,
-  delay?: number | Date,
-): Timer {
+export function createInterval(cb: (...args: any[]) => void, interval?: number, delay?: number | Date): Timer {
   let waitUntil = parseInterval(parseDelay(delay ?? 0), interval ?? 0);
   let timer: ReturnType<typeof setTimeout> | null = null;
   let pauseRemains: number | null = null;

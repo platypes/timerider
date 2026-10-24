@@ -1,8 +1,8 @@
-# timerider <a href="https://github.com/denostack"><img src="https://raw.githubusercontent.com/denostack/images/main/logo.svg" width="160" align="right" /></a>
+# timerider <a href="https://github.com/platypes"><img src="https://raw.githubusercontent.com/denostack/images/main/logo.svg" width="160" align="right" /></a>
 
 <p>
-  <a href="https://github.com/denostack/timerider/actions"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/denostack/timerider/ci.yml?branch=main&logo=github&style=flat-square" /></a>
-  <a href="https://codecov.io/gh/denostack/timerider"><img alt="Coverage" src="https://img.shields.io/codecov/c/gh/denostack/timerider?style=flat-square" /></a>
+  <a href="https://github.com/platypes/timerider/actions"><img alt="Build" src="https://img.shields.io/github/actions/workflow/status/platypes/timerider/ci.yml?branch=main&logo=github&style=flat-square" /></a>
+  <a href="https://codecov.io/gh/platypes/timerider"><img alt="Coverage" src="https://img.shields.io/codecov/c/gh/platypes/timerider?style=flat-square" /></a>
   <img alt="License" src="https://img.shields.io/npm/l/timerider.svg?style=flat-square" />
   <img alt="Language Typescript" src="https://img.shields.io/badge/language-Typescript-007acc.svg?style=flat-square" />
   <br />
@@ -26,16 +26,14 @@ Timerider improves upon standard timers in three key ways:
 
 ## Installation
 
-### Deno
+```bash
+npm install timerider
+```
+
+### Deno (JSR)
 
 ```bash
 deno add jsr:@denostack/timerider
-```
-
-### Node.js & Browser
-
-```bash
-npm install timerider
 ```
 
 ## Usage
@@ -45,7 +43,7 @@ npm install timerider
 `createTimeout` works like `setTimeout` but returns a `Timer` object with additional control.
 
 ```ts
-import { createTimeout } from "@denostack/timerider";
+import { createTimeout } from "timerider";
 
 // Basic usage
 createTimeout(() => {
@@ -71,7 +69,7 @@ setTimeout(() => {
 `createInterval` works like `setInterval` but with built-in drift correction.
 
 ```ts
-import { createInterval } from "@denostack/timerider";
+import { createInterval } from "timerider";
 
 createInterval(() => {
   console.log("Tick every 1 second");
@@ -83,7 +81,7 @@ createInterval(() => {
 Standard timers fail with delays larger than ~24.8 days (2^31 - 1 milliseconds). Timerider handles this seamlessly.
 
 ```ts
-import { createTimeout } from "@denostack/timerider";
+import { createTimeout } from "timerider";
 
 // Wait for 30 days
 const thirtyDays = 1000 * 60 * 60 * 24 * 30;
