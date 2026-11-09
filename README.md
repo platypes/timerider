@@ -6,7 +6,7 @@
   <img alt="License" src="https://img.shields.io/npm/l/timerider.svg?style=flat-square" />
   <img alt="Language Typescript" src="https://img.shields.io/badge/language-Typescript-007acc.svg?style=flat-square" />
   <br />
-  <a href="https://jsr.io/@denostack/timerider"><img alt="JSR version" src="https://jsr.io/badges/@denostack/timerider?style=flat-square" /></a>
+  <a href="https://jsr.io/@platypes/timerider"><img alt="JSR version" src="https://jsr.io/badges/@platypes/timerider?style=flat-square" /></a>
   <a href="https://www.npmjs.com/package/timerider"><img alt="NPM Version" src="https://img.shields.io/npm/v/timerider.svg?style=flat-square&logo=npm" /></a>
   <a href="https://npmcharts.com/compare/timerider?minimal=true"><img alt="Downloads" src="https://img.shields.io/npm/dt/timerider.svg?style=flat-square" /></a>
 </p>
@@ -30,10 +30,12 @@ Timerider improves upon standard timers in three key ways:
 npm install timerider
 ```
 
-### Deno (JSR)
+### JSR
 
 ```bash
-deno add jsr:@denostack/timerider
+deno add jsr:@platypes/timerider
+# or, from Node.js
+npx jsr add @platypes/timerider
 ```
 
 ## Usage

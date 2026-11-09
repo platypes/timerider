@@ -29,14 +29,16 @@
       "default": "./dist/mod.js"
     }
   },
+  "types": "./dist/mod.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "!dist/**/*.test.*"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
-    "test": "node --test",
+    "test": "node --test \"**/*.test.ts\"",
     "check": "biome check . && tsc --noEmit",
     "fix": "biome check --write .",
     "build": "tsc",
@@ -44,7 +46,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.2",
-    "@types/node": "^20.19.43",
+    "@types/node": "^22.20.5",
     "typescript": "^7.0.2"
   }
 }

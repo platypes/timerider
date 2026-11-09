@@ -23,7 +23,6 @@
     "*.ts"
   ],
   "exclude": [
-    "*.test.ts",
     "dist",
     "node_modules"
   ]

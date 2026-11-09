@@ -1,0 +1,14 @@
+{
+  "name": "@platypes/timerider",
+  "version": "0.2.0",
+  "exports": "./mod.ts",
+  "publish": {
+    "exclude": [
+      ".github",
+      ".vscode",
+      "dist",
+      "node_modules",
+      "**/*.test.ts"
+    ]
+  }
+}
