@@ -79,10 +79,12 @@ test("createTimeout() - can be cleared", async () => {
 
 // --- createInterval Tests ---
 
-test("createInterval() - executes callback repeatedly", async () => {
+test("createInterval() - executes callback repeatedly", async (t) => {
   const spyCallback = mock.fn(() => {});
   // Run every 50ms
   const timer = createInterval(spyCallback, 50);
+  // Stop the interval even if an assertion fails, so the test process can exit.
+  t.after(() => timer.clear());
 
   // Wait 225ms (approx 4 calls: 50, 100, 150, 200)
   await sleep(225);
@@ -95,10 +97,12 @@ test("createInterval() - executes callback repeatedly", async () => {
   assert.strictEqual(timer.state(), "completed");
 });
 
-test("createInterval() - executes with initial delay", async () => {
+test("createInterval() - executes with initial delay", async (t) => {
   const spyCallback = mock.fn(() => {});
   // Delay 100ms, then run every 50ms
   const timer = createInterval(spyCallback, 50, 100);
+  // Stop the interval even if an assertion fails, so the test process can exit.
+  t.after(() => timer.clear());
 
   // Wait 80ms (still in delay)
   await sleep(80);
@@ -113,9 +117,11 @@ test("createInterval() - executes with initial delay", async () => {
   timer.clear();
 });
 
-test("createInterval() - can be paused and restarted", async () => {
+test("createInterval() - can be paused and restarted", async (t) => {
   const spyCallback = mock.fn(() => {});
   const timer = createInterval(spyCallback, 50);
+  // Stop the interval even if an assertion fails, so the test process can exit.
+  t.after(() => timer.clear());
 
   // Allow 2 calls (~100ms)
   await sleep(120);
@@ -142,12 +148,14 @@ test("createInterval() - can be paused and restarted", async () => {
   timer.clear();
 });
 
-test("createInterval() - can be cleared", async () => {
+test("createInterval() - can be cleared", async (t) => {
   const spyCallback = mock.fn(() => {});
   const timer = createInterval(spyCallback, 50);
+  // Stop the interval even if an assertion fails, so the test process can exit.
+  t.after(() => timer.clear());
 
-  // Wait for 1 call
-  await sleep(60);
+  // Wait for 1 call (the 1st runs at 50ms, the 2nd at 100ms)
+  await sleep(75);
   assert.strictEqual(spyCallback.mock.callCount(), 1);
 
   // Clear
