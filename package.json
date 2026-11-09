@@ -1,0 +1,52 @@
+{
+  "name": "timerider",
+  "version": "0.2.0",
+  "description": "Accurate timers with drift correction, pause/resume, and long delay support.",
+  "keywords": [
+    "timer",
+    "timeout",
+    "interval",
+    "drift-correction",
+    "pause",
+    "resume",
+    "long-delay",
+    "deno",
+    "npm"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/platypes/timerider#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/platypes/timerider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/platypes/timerider/issues"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/mod.d.ts",
+      "default": "./dist/mod.js"
+    }
+  },
+  "types": "./dist/mod.d.ts",
+  "files": [
+    "dist",
+    "!dist/**/*.test.*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test \"**/*.test.ts\"",
+    "check": "biome check . && tsc --noEmit",
+    "fix": "biome check --write .",
+    "build": "tsc",
+    "prepublishOnly": "npm run check && npm test && npm run build"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.6.2",
+    "@types/node": "^22.20.5",
+    "typescript": "^7.0.2"
+  }
+}

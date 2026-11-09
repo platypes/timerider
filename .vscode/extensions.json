@@ -1,6 +1,6 @@
 {
   "recommendations": [
-    "denoland.vscode-deno",
+    "biomejs.biome",
     "streetsidesoftware.code-spell-checker",
     "github.vscode-github-actions"
   ]

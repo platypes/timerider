@@ -9,25 +9,36 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      matrix:
+        # 22 is the lowest supported version (engines), 24 is the main one.
+        node: [22, 24]
     steps:
-      - name: Git Checkout Deno Module
-        uses: actions/checkout@v4
-      - uses: denoland/setup-deno@v2
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
-          deno-version: v2.x
-      - name: Format
-        run: deno fmt --check
-      - name: Lint
-        run: deno lint
-      - name: Unit Test
-        run: deno test --coverage=coverage
-      - name: Create coverage report
-        run: deno coverage ./coverage --lcov > coverage.lcov
-      - name: Collect coverage
-        uses: codecov/codecov-action@v5
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - name: Check
+        run: npm run check
+      - name: Test
+        # Same as `npm test`, plus coverage. Flags must come before the glob.
+        run: >-
+          node --test
+          --experimental-test-coverage
+          --test-reporter=spec --test-reporter-destination=stdout
+          --test-reporter=lcov --test-reporter-destination=lcov.info
+          "**/*.test.ts"
+      - name: Upload coverage
+        if: matrix.node == 24
+        # No CODECOV_TOKEN yet, so a failed upload must not fail CI.
+        continue-on-error: true
+        uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          slug: denostack/timerider
-          files: ./coverage.lcov
-      - name: Build Module
-        run: deno task build:npm
+          files: ./lcov.info
+          fail_ci_if_error: false
+      - name: Build
+        run: npm run build
