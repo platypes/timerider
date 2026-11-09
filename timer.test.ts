@@ -154,8 +154,8 @@ test("createInterval() - can be cleared", async (t) => {
   // Stop the interval even if an assertion fails, so the test process can exit.
   t.after(() => timer.clear());
 
-  // Wait for 1 call (the 1st runs at 50ms, the 2nd at 100ms)
-  await sleep(75);
+  // Wait for 1 call
+  await sleep(60);
   assert.strictEqual(spyCallback.mock.callCount(), 1);
 
   // Clear
