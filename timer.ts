@@ -90,7 +90,9 @@ export function createInterval(cb: (...args: any[]) => void, interval?: number, 
     if (remains <= ACCURACY) {
       timer = setTimeout(() => {
         cb();
-        waitUntil = parseInterval(waitUntil, interval || 0);
+        // Always move to the next tick: timers can fire a few ms early, and then
+        // parseInterval alone would keep the same waitUntil and call cb again.
+        waitUntil = parseInterval(waitUntil + (interval || 0), interval || 0);
         resume();
       }, remains);
     } else {
